@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import "./style.css";
-import Phaser from "phaser";
+import * as Phaser from "phaser";
 import Link from "next/link";
 
 const MainScene = (props: {
