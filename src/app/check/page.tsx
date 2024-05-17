@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import MainScene from "../main";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default () => {
+const PageCheck = () => {
   const searchParams = useSearchParams();
 
   const search = searchParams.get("claw_game_code");
@@ -43,3 +43,4 @@ export default () => {
     </main>
   );
 };
+export default PageCheck;
