@@ -8,6 +8,30 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        showslow: {
+          "0%": { opacity: "0", transform: "scale(0) rotate(0deg) " },
+          "100%": { opacity: "1", transform: "scale(1) rotate(360deg)" },
+        },
+        opacityshow: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        opacityshowhalf: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "0.7" },
+        },
+        spinning: {
+          "0%": { transform: "rotate(0deg) scale(1)" },
+          "100%": { transform: "rotate(360deg) scale(1) " },
+        },
+      },
+      animation: {
+        "spin-show": "showslow 1s linear 1",
+        "opacity-slow": "opacityshow 1s linear 1",
+        "opacity-slow-half": "opacityshowhalf 1s linear 1",
+        "spin-slow": "spinning 3s linear infinite",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
