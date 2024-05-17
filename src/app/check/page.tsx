@@ -1,19 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
-import MainScene from "../main";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-
-const PageCheck = () => {
+const Checker = () => {
   const searchParams = useSearchParams();
 
-  const search = searchParams.get("claw_game_code");
+  const cgc = searchParams.get("claw_game_code");
   const [status, setStatus] = useState("loading");
   const router = useRouter();
   useEffect(() => {
     const api = "";
     const myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
-    fetch(`${api}/api/claw-game/check?claw_game_code=${search}`, {
+    fetch(`${api}/api/claw-game/check?claw_game_code=${cgc}`, {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
@@ -23,7 +21,7 @@ const PageCheck = () => {
         if (res.status == 200) {
           setStatus("valid");
           localStorage.setItem("token", resData.message as string);
-          localStorage.setItem("claw_game_code", search as string);
+          localStorage.setItem("claw_game_code", cgc as string);
 
           router.push("/");
         } else {
@@ -41,6 +39,13 @@ const PageCheck = () => {
         ? "redirecting"
         : "game code invalid"}
     </main>
+  );
+};
+const PageCheck = () => {
+  return (
+    <Suspense>
+      <Checker />
+    </Suspense>
   );
 };
 export default PageCheck;

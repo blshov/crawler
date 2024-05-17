@@ -1,8 +1,9 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import MainScene from "./main";
-import { useEffect, useState } from "react";
 
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+const MainScene = dynamic(() => import("@/app/main"), { ssr: false });
 export default function Home() {
   const router = useRouter();
   const [isValid, setValid] = useState(false);
