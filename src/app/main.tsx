@@ -279,7 +279,7 @@ const MainScene = (props: {
                 {reward}
               </div>
             </div>
-            <div className="lg:text-4xl text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+            <div className="lg:text-4xl text-xl text-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
               Kamu mendapat {reward}
             </div>
             <div className="flex gap-4 flex-row items-center justify-center">
