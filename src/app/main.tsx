@@ -5,18 +5,19 @@ import * as Phaser from "phaser";
 import Link from "next/link";
 
 const MainScene = (props: {
+  clawCode: string;
+  isGamePlayed: boolean;
   clawAssetLocation: string;
   rewardAssetsLocations: string[];
   bottomBorderAssetLocation: string;
   topBorderAssetLocation: string;
   bgAssetLocation: string;
   rewardList: string[];
-  fetchCallback: (clawGameCode: string) => Promise<string>;
+  fetchCallback: (clawGameCode: string) => Promise<any>;
 }) => {
   const [isGameDone, setIsGameDone] = useState(false);
   const [isNewPage, setIsNewPage] = useState(true);
-
-  const [reward, setReward] = useState<String>("");
+  const [reward, setReward] = useState<any>();
   const sizes = {
     width: 380,
     height: 700,
@@ -166,15 +167,14 @@ const MainScene = (props: {
     }
 
     update() {
+      props.isGamePlayed && this.scene.pause();
       this.rope.setX(this.claw?.body.x);
       this.rope.setY(this.claw?.body.y);
 
       if (this.claw?.body.y! < 0) {
-        fetchReward().then((fetchedReward) => {
-          setReward(fetchedReward);
+        fetchReward().then((reward) => {
+          setReward(reward);
           setIsGameDone(true);
-          localStorage.removeItem("token");
-          localStorage.removeItem("claw_game_code");
         });
 
         this.claw?.setVelocity(0, 0);
@@ -212,12 +212,17 @@ const MainScene = (props: {
     }
   }
   const fetchReward = async () => {
-    const clawGameCode = localStorage.getItem("claw_game_code");
-    const reward = await props.fetchCallback(clawGameCode!);
+    const reward = await props.fetchCallback(props.clawCode);
     return reward;
   };
 
   useEffect(() => {
+    if (props.isGamePlayed) {
+      fetchReward().then((reward) => {
+        setReward(reward);
+        setIsGameDone(true);
+      });
+    }
     const getCanvas = () => {
       const canvas = document.getElementById("gameCanvas");
       if (canvas instanceof HTMLCanvasElement) return canvas;
@@ -276,11 +281,11 @@ const MainScene = (props: {
                 </div>
               </div>
               <div className="flex w-full h-full items-center text-center justify-center basis-2/12 bg-slate-800 ">
-                {reward}
+                {`Voucher ${reward.data.voucher.discount_amount}`}
               </div>
             </div>
             <div className="lg:text-4xl text-xl text-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
-              Kamu mendapat {reward}
+              {`Kamu mendapat voucher ${reward.data.voucher.discount_amount} dengan minimum pembelian ${reward.data.voucher.min_purchase}`}
             </div>
             <div className="flex gap-4 flex-row items-center justify-center">
               <Link
@@ -301,7 +306,7 @@ const MainScene = (props: {
           </div>
         </div>
       )}
-      {isNewPage && (
+      {isNewPage && !isGameDone && (
         <div className="top-0 left-0 flex absolute w-full h-full  items-center justify-center overflow-hidden">
           <div className="flex bg-slate-500 w-full h-full opacity-20"></div>
           <div className="flex absolute text-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
