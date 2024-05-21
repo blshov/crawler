@@ -33,7 +33,7 @@ main {
   display: flex;
 }
 #main {
-  background-image: url("../../public/assets/background1.png");
+  background-image: url("../../public/assets/background1-min.webp");
 }
 #gameCanvas {
   border: 1px solid black;

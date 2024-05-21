@@ -55,7 +55,7 @@ const MainScene = (props: {
         this.load.image(props.rewardList[i], props.rewardAssetsLocations[i]);
       }
       this.load.image("claw", props.clawAssetLocation);
-      this.load.image("rope", "assets/rapsrope.png");
+      this.load.image("rope", "assets/rapsrope-min.webp");
       this.load.image("topBorder", props.bottomBorderAssetLocation);
       this.load.image("bottomBorder", props.topBorderAssetLocation);
     }
@@ -260,7 +260,7 @@ const MainScene = (props: {
           <div className="flex animate-opacity-slow-half w-full h-full bg-slate-800 z-0 opacity-70"></div>
           <img
             className="flex flex-col w-screen aspect-square  animate-spin-slow absolute invert"
-            src="surpeff.png"
+            src="surpeff.webp"
             alt=""
           />
           {/* <div className="flex flex-col w-screen aspect-square bg-gradient-to-r from-transparent to-white animate-spin-slow"></div> */}
@@ -275,7 +275,7 @@ const MainScene = (props: {
                   <img
                     height={150}
                     width={150}
-                    src={"assets/ticket.png"}
+                    src={"assets/ticket-min.webp"}
                     alt=""
                   />
                 </div>
@@ -315,7 +315,7 @@ const MainScene = (props: {
         </div>
       )}
       <div className="flex justify-center items-center w-screen">
-        <img className="h-screen " src="assets/rapsmachine.png" alt="" />
+        <img className="h-screen " src="assets/rapsmachine-min.webp" alt="" />
       </div>
       <canvas className="h-screen" id="gameCanvas"></canvas>
     </div>
