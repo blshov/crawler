@@ -7,7 +7,7 @@ const MainScene = dynamic(() => import("@/app/main"), { ssr: false });
 export default function Home() {
   const router = useRouter();
   const [isValid, setValid] = useState(false);
-  const api = "";
+  const api = process.env.NEXT_PUBLIC_API;
   // Rule :
   //
   // clawAssetLocation = location where claw asset is located inside public folder (acceptable size is width = 64px & height = 64px)

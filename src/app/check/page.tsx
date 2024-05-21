@@ -8,7 +8,7 @@ const Checker = () => {
   const [status, setStatus] = useState("loading");
   const router = useRouter();
   useEffect(() => {
-    const api = "";
+    const api = process.env.NEXT_PUBLIC_API;
     const myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     fetch(`${api}/api/claw-game/check?claw_game_code=${cgc}`, {
