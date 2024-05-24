@@ -4,6 +4,9 @@ import "./style.css";
 import * as Phaser from "phaser";
 import Link from "next/link";
 
+import shieldIcon from "../../public/assets/Icon.webp";
+import Image from "next/image";
+
 const MainScene = (props: {
   clawCode: string;
   isGamePlayed: boolean;
@@ -211,6 +214,18 @@ const MainScene = (props: {
       }
     }
   }
+  const ribuanFormat = (nominal: string) => {
+    var appendableVar = "";
+    var count = 2;
+    for (var i = nominal.length - 1; i > -1; i--) {
+      appendableVar = nominal[i] + appendableVar;
+      if (count == 0) {
+        count = 2;
+        appendableVar = "." + appendableVar;
+      } else count--;
+    }
+    return appendableVar;
+  };
   const fetchReward = async () => {
     const reward = await props.fetchCallback(props.clawCode);
     return reward;
@@ -265,13 +280,15 @@ const MainScene = (props: {
           />
           {/* <div className="flex flex-col w-screen aspect-square bg-gradient-to-r from-transparent to-white animate-spin-slow"></div> */}
           <div className="flex flex-col gap-6 absolute items-center justify-center">
-            <div className="lg:text-5xl text-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+            {/* <div className="lg:text-5xl text-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
               🎉 SELAMAT! 🎉
-            </div>
-            <div className="px-8 flex drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] flex-col animate-spin-show w-64 h-64 bg-slate-500 rounded-md items-center justify-center ">
-              <div className="flex w-full h-full items-center justify-center basis-9/12 ">
-                <div className="w-[100px] aspect-square justify-center items-center bg-white flex rounded-[9999px] blur-2xl"></div>
-                <div className="h-[50px] overflow-hidden rotate-[17deg] absolute">
+            </div> */}
+            <div className="font-medium gap-4 px-8 py-4 flex drop-shadow-[0_1.2px_1.2px_rgba(255,255,255,0.2)] flex-col animate-spin-show w-[27rem] h-full bg-gradient-45 from-[#070921] to-[#20235B] rounded-md items-center justify-center ">
+              <Image src={shieldIcon} height={96} alt={""}></Image>
+              <div className="text-4xl font-semibold">SELAMAT</div>
+              <div className="flex aspect-square items-center justify-center   ">
+                {/* <div className="w-[100px] aspect-square justify-center items-center bg-white flex rounded-[9999px] blur-2xl"></div> */}
+                <div className="h-[50px] overflow-hidden rotate-[17deg] ">
                   <img
                     height={150}
                     width={150}
@@ -280,13 +297,47 @@ const MainScene = (props: {
                   />
                 </div>
               </div>
-              <div className="flex w-full h-full items-center text-center justify-center basis-2/12 bg-slate-800 ">
-                {`Voucher ${reward.data.voucher.discount_amount}`}
+              <div className="flex text-center">{`Kamu mendapatkan voucher ${reward.data.voucher.service.name}`}</div>
+              <div className="flex text-center text-xl font-semibold">
+                {`Kode voucher:`}&nbsp;
+                <span className="font-bold text-blue-200">
+                  {reward.data.voucher.code}
+                </span>
               </div>
+              <div className="flex text-center text-xl font-semibold">{`Detail Reward`}</div>
+              <ul className="list-decimal">
+                <li>
+                  {`Potongan harga `}
+                  <span className="text-yellow-200">{`Rp.${ribuanFormat(
+                    reward.data.voucher.discount_amount.toString()
+                  )}`}</span>
+                </li>
+                <li>
+                  {`Minimal pembelian `}
+                  <span className="text-yellow-200">{`Rp.${ribuanFormat(
+                    reward.data.voucher.min_purchase.toString()
+                  )}`}</span>
+                </li>
+                <li>
+                  {`Masa berlaku hingga `}
+                  <span className="text-yellow-200">
+                    {reward.data.voucher.end_date}
+                  </span>
+                  {` pukul `}
+                  <span className="text-yellow-200">
+                    {reward.data.voucher.end_time}
+                  </span>
+                </li>
+              </ul>
+              <div className="flex text-center"></div>
+
+              {/* <div className="flex w-full h-full items-center text-center justify-center basis-2/12 bg-slate-800 ">
+                {`Voucher ${reward.data.voucher.discount_amount}`}
+              </div> */}
             </div>
-            <div className="lg:text-4xl text-xl text-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+            {/* <div className="lg:text-4xl text-xl text-center drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
               {`Kamu mendapat voucher ${reward.data.voucher.discount_amount} dengan minimum pembelian ${reward.data.voucher.min_purchase}`}
-            </div>
+            </div> */}
             <div className="flex gap-4 flex-row items-center justify-center">
               <Link
                 className="flex h-16 w-32 rounded-lg text-black bg-white items-center justify-center"

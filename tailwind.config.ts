@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-
+let defaultTheme = require("tailwindcss/defaultTheme");
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -33,6 +33,7 @@ const config: Config = {
         "spin-slow": "spinning 3s linear infinite",
       },
       backgroundImage: {
+        "gradient-45": "linear-gradient(315deg, var(--tw-gradient-stops))",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
