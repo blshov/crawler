@@ -283,7 +283,7 @@ const MainScene = (props: {
             {/* <div className="lg:text-5xl text-2xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
               🎉 SELAMAT! 🎉
             </div> */}
-            <div className="font-medium  gap-4 px-8 py-4 flex drop-shadow-[0_1.2px_1.2px_rgba(255,255,255,0.2)] flex-col animate-spin-show w-[20rem] lg:w-[27rem] h-full bg-gradient-45 from-[#070921] to-[#20235B] rounded-md items-center justify-center ">
+            <div className="font-medium  gap-4 px-8 py-4 flex drop-shadow-[0_1.2px_1.2px_rgba(255,255,255,0.2)] flex-col animate-spin-show w-[20rem] lg:w-[27rem] h-[100dvh] bg-gradient-45 from-[#070921] to-[#20235B] rounded-md items-center justify-center ">
               <Image src={shieldIcon} height={96} alt={""}></Image>
               <div className="text-4xl font-semibold">SELAMAT</div>
               <div className="flex aspect-square items-center justify-center   ">
