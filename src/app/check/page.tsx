@@ -38,7 +38,7 @@ const Checker = () => {
     });
   }, []);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
+    <main className="flex min-h-[100dvh] flex-col items-center justify-center">
       {status == "loading" ? (
         "validating purchase..."
       ) : status == "valid" && cgc ? (
