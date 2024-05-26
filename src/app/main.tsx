@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import shieldIcon from "../../public/assets/Icon.webp";
 import Image from "next/image";
+import { useWindowSize } from "react-use";
 
 const MainScene = (props: {
   clawCode: string;
@@ -18,6 +19,7 @@ const MainScene = (props: {
   rewardList: string[];
   fetchCallback: (clawGameCode: string) => Promise<any>;
 }) => {
+  const { width: windowWidth, height: windowHeight } = useWindowSize();
   const [isGameDone, setIsGameDone] = useState(false);
   const [isNewPage, setIsNewPage] = useState(true);
   const [reward, setReward] = useState<any>();
@@ -262,7 +264,7 @@ const MainScene = (props: {
       scene: GameScene,
     };
     const game = new Phaser.Game(config);
-  }, []);
+  });
   return (
     <div
       className={`flex h-full w-full font-oxanium ${
@@ -271,12 +273,15 @@ const MainScene = (props: {
       id="main"
     >
       {isGameDone && (
-        <div className="top-0 left-0 flex absolute w-full h-full animate-opacity-slow items-center justify-center overflow-hidden">
+        <div className="top-0 left-0 flex absolute z-[12] w-full h-full animate-opacity-slow items-center justify-center overflow-hidden">
           <div className="flex animate-opacity-slow-half w-full h-full bg-slate-800 z-0 opacity-70"></div>
-          <img
-            className="flex flex-col w-screen aspect-square  animate-spin-slow absolute invert"
-            src="surpeff.webp"
+          <Image
+            className="flex flex-col aspect-square animate-spin-slow absolute invert"
+            src="/surpeff.webp"
             alt=""
+            width={windowWidth}
+            height={windowWidth}
+            priority
           />
           {/* <div className="flex flex-col w-screen aspect-square bg-gradient-to-r from-transparent to-white animate-spin-slow"></div> */}
           <div className="flex flex-col gap-2 lg:gap-6 absolute items-center justify-center">
@@ -289,10 +294,10 @@ const MainScene = (props: {
               <div className="flex aspect-square items-center justify-center   ">
                 {/* <div className="w-[100px] aspect-square justify-center items-center bg-white flex rounded-[9999px] blur-2xl"></div> */}
                 <div className="h-[50px] overflow-hidden rotate-[17deg] ">
-                  <img
+                  <Image
                     height={150}
                     width={150}
-                    src={"assets/ticket-min.webp"}
+                    src={"/assets/ticket-min.webp"}
                     alt=""
                   />
                 </div>
@@ -366,9 +371,17 @@ const MainScene = (props: {
         </div>
       )}
       <div className="flex justify-center items-center w-screen">
-        <img className="h-screen " src="assets/rapsmachine-min.webp" alt="" />
+        <div className="h-[100dvh] bg-red-500">
+          <Image
+            // height={windowHeight}
+            className="object-contain"
+            fill
+            src="/assets/rapsmachine-min.webp"
+            alt=""
+          />
+        </div>
       </div>
-      <canvas className="h-screen" id="gameCanvas"></canvas>
+      <canvas className="h-[100dvh]" id="gameCanvas"></canvas>
     </div>
   );
 };
