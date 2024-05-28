@@ -36,7 +36,7 @@ const Checker = () => {
         }
       });
     });
-  });
+  }, []);
   return (
     <main className="flex min-h-[100dvh] flex-col items-center justify-center">
       {status == "loading" ? (
